@@ -8,6 +8,7 @@ def check_vector_type(vector, input_type):
             return False
     return True
 
+
 def get_minimum_index_value(index1, index2, vector1, vector2):
     result = vector1[index1]
     if index2 < index1:
@@ -31,9 +32,6 @@ def first_repeated_element(vector1, vector2):
         return 'please enter two vectors of integer'
     index1 = find_first_duplicated_in_two_vectors(vector1, vector2)
     index2 = find_first_duplicated_in_two_vectors(vector2, vector1)
-    if (index1!=None) and (index2!=None):
+    if (index1 != None) and (index2 != None):
         return get_minimum_index_value(index1, index2, vector1, vector2)
     return result
-
-
-
