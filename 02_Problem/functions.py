@@ -1,6 +1,5 @@
 import os
 import re
-path = "C:\\Users\\Ibtihel\\PycharmProjects\\Wallbox"
 
 
 def get_list_of_administrator():
@@ -21,12 +20,12 @@ def get_file_owner(path, file_name):
         - ``path``: path of the directory
         - ``file_name``: the specific file name
     """
-    fullpath = path + '\\'+file_name
+    fullpath = path + '\\' + file_name
     cmd = 'dir /q ' + fullpath
     res = os.popen(cmd).read().strip()
     for data in res.split('\n'):
         if data.find(file_name) != -1:
-            size, owner = re.split("\s{2,}", data.strip())[-1].split(' ', 1)
+            size, owner = re.split(" {2,}", data.strip())[-1].split(' ', 1)
             owner = owner.split('\\')[1].split(file_name)[0]
             return owner
 
@@ -53,7 +52,7 @@ def get_file_dict_by_extension(path, extension):
     else:
         for data in res.split('\n'):
             if data.find(extension) != -1:
-                size, name = re.split("\s{2,}", data.strip())[-1].split(' ', 1)
+                size, name = re.split(" {2,}", data.strip())[-1].split(' ', 1)
                 owner = get_file_owner(path, name)
                 name = name.split('.')[0]
                 dictfile[name] = [owner, convert_file_size_from_string_to_int(size)]
@@ -63,7 +62,6 @@ def get_file_dict_by_extension(path, extension):
 def first_file_meets_the_requirement(path, extension, max_size):
     list_owner = get_list_of_administrator()
     dict_file = get_file_dict_by_extension(path, extension)
-    print(dict_file)
     resultat = None
     for name, items in dict_file.items():
         owner = items[0]
@@ -73,4 +71,3 @@ def first_file_meets_the_requirement(path, extension, max_size):
     return resultat
 
 
-print(first_file_meets_the_requirement(path, 'exe', 14680064))
